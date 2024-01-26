@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FBtn } from './button/button';
 import { Statistics } from './statistics/Statistics';
 import { Notification } from './notification/Notification';
 import { FeedbackOptions } from './feedbackoptions/FeedbackOptions';

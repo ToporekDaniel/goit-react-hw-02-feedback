@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FBtn } from './button/button';
 import { Statistics } from './statistics/Statistics';
+import { Notification } from './notification/Notification';
+import { FeedbackOptions } from './feedbackoptions/FeedbackOptions';
 
 export const App = () => {
   const [feedback, setFeedback] = useState({
@@ -32,19 +34,26 @@ export const App = () => {
 
   return (
     <>
-      <FBtn btnName="Good" onClick={() => handleBtnClick('Good')} />
-      <FBtn btnName="Neutral" onClick={() => handleBtnClick('Neutral')} />
-      <FBtn btnName="Bad" onClick={() => handleBtnClick('Bad')} />
-      <Statistics
-        good={feedback.Good}
-        neutral={feedback.Neutral}
-        bad={feedback.Bad}
-        total={countTotalFeedback(feedback)}
-        positivePercentage={countPositiveFeedbackPercentage(
-          countTotalFeedback(feedback),
-          feedback
-        )}
+      <h1>Please leave feedback</h1>
+      <FeedbackOptions
+        options={['Good', 'Neutral', 'Bad']}
+        onLeaveFeedback={handleBtnClick}
       />
+      <h2>Statistics</h2>
+      {countTotalFeedback(feedback) > 0 ? (
+        <Statistics
+          good={feedback.Good}
+          neutral={feedback.Neutral}
+          bad={feedback.Bad}
+          total={countTotalFeedback(feedback)}
+          positivePercentage={countPositiveFeedbackPercentage(
+            countTotalFeedback(feedback),
+            feedback
+          )}
+        />
+      ) : (
+        <Notification message="There is no feedback" />
+      )}
     </>
   );
 };

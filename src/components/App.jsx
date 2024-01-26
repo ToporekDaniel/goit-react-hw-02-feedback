@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FBtn } from './button/button';
+import { Statistics } from './statistics/Statistics';
 
 export const App = () => {
   const [feedback, setFeedback] = useState({
@@ -34,16 +35,16 @@ export const App = () => {
       <FBtn btnName="Good" onClick={() => handleBtnClick('Good')} />
       <FBtn btnName="Neutral" onClick={() => handleBtnClick('Neutral')} />
       <FBtn btnName="Bad" onClick={() => handleBtnClick('Bad')} />
-      <div>
-        Good: {feedback.Good}, Neutral: {feedback.Neutral}, Bad: {feedback.Bad},
-        Total: {countTotalFeedback(feedback)}
-        Positive Feedback:
-        {countPositiveFeedbackPercentage(
+      <Statistics
+        good={feedback.Good}
+        neutral={feedback.Neutral}
+        bad={feedback.Bad}
+        total={countTotalFeedback(feedback)}
+        positivePercentage={countPositiveFeedbackPercentage(
           countTotalFeedback(feedback),
           feedback
         )}
-        %
-      </div>
+      />
     </>
   );
 };
